@@ -91,7 +91,7 @@ need to pass in a lambda.</p>
   (format stream &quot;GET / HTTP/1.1~C~C~C~C&quot;
           #\Return #\Newline #\Return #\Newline)
   (force-output stream)
-  (format t (read-line stream)))
+  (format nil (read-line stream)))
 </code></pre>
 
 <p><code>with-open-socket</code> is effectively new syntax to the language that ends

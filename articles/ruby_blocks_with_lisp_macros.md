@@ -83,7 +83,7 @@ need to pass in a lambda.
   (format stream "GET / HTTP/1.1~C~C~C~C"
           #\Return #\Newline #\Return #\Newline)
   (force-output stream)
-  (format t (read-line stream)))
+  (format nil (read-line stream)))
 ````
 
 `with-open-socket` is effectively new syntax to the language that ends
