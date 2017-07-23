@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./script/render articles/ruby_blocks_with_lisp_macros.md > index.html
