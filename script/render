@@ -1,0 +1,27 @@
+#!/usr/bin/ruby
+
+require 'redcarpet'
+
+def article_template(body)
+%{
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        margin: 0 auto;
+        max-width: 50em;
+        font-family: "Helvetica", "Arial", sans-serif;
+      }
+    </style>
+  </head>
+<body>
+#{body}
+</body>
+}
+end
+
+markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
+body = markdown.render(File.read(ARGV[0]))
+puts article_template(body)
+
