@@ -1,7 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+  body {
+    margin: 0 auto;
+    max-width: 50em;
+    font-family: "Helvetica", "Arial", sans-serif;
+  }
+</style>
+</head>
+<body>
 <h1>Ruby Block Syntax in Lisp</h1>
 
 <h4>Sunday, July 23, 2017</h4>
-
 <p>The ruby block and yield syntax is really useful for hiding away setup and
 cleanup code. For example, we can write <code>with_open_socket</code> which opens a TCP
 connection, yields to the caller and then closes the connection as cleanup
@@ -80,3 +91,5 @@ need to pass in a lambda.</p>
 
 <p><code>with-open-socket</code> is effectively new syntax to the language that ends
 up just as clean as the Ruby block syntax.</p>
+</body>
+</html>
