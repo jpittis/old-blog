@@ -72,7 +72,10 @@ block syntax to Lisp using a macro.
      result))
 ````
 
-And we can call this macro similarly to above except that we no longer
+At read / compile time, `addr` and `port` are replaced and the body of the
+macro is pasted into the let statement so that it binds to result.
+
+We can call this macro similarly to above except that we no longer
 need to pass in a lambda.
 
 ````lisp

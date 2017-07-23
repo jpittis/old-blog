@@ -81,7 +81,10 @@ block syntax to Lisp using a macro.</p>
      result))
 </code></pre>
 
-<p>And we can call this macro similarly to above except that we no longer
+<p>At read / compile time, <code>addr</code> and <code>port</code> are replaced and the body of the
+macro is pasted into the let statement so that it binds to result.</p>
+
+<p>We can call this macro similarly to above except that we no longer
 need to pass in a lambda.</p>
 
 <pre><code class="lisp">(with-open-socket (&quot;www.google.com&quot; 80)
