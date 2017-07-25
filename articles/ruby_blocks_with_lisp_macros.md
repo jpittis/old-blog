@@ -53,11 +53,13 @@ today.
 
 ````lisp
 (with_open_socket "www.google.com" 80
-                (lambda (stream)
+                  (lambda (stream)
                     (format stream "GET / HTTP/1.1~C~C~C~C"
                             #\Return #\Newline #\Return #\Newline)
                     (force-output stream)
-                    (format t (read-line stream))))
+                    (read-line stream)))
+
+=> "HTTP/1.1 302 Found"
 ````
 
 Now I'd like to see if we can forget the lambda and add a similar
@@ -83,8 +85,14 @@ need to pass in a lambda.
   (format stream "GET / HTTP/1.1~C~C~C~C"
           #\Return #\Newline #\Return #\Newline)
   (force-output stream)
-  (format nil (read-line stream)))
+  (read-line stream))
+
+=> "HTTP/1.1 302 Found"
 ````
 
 `with-open-socket` is effectively new syntax to the language that ends
 up just as clean as the Ruby block syntax.
+
+An interesting tidbit is that the lambda from `with-open-socket` was auto
+formatted by emacs as if it was a function parameter. The macro
+`with-open-socket` is formatted just like a `defun` or `defmacro` expression.
