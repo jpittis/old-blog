@@ -83,8 +83,8 @@ block syntax to Lisp using a macro.</p>
      result))
 </code></pre>
 
-<p>At read / compile time, <code>addr</code> and <code>port</code> are replaced and the body of the
-macro is pasted into the let statement so that it binds to result.</p>
+<p>At read / compile time, <code>addr</code> and <code>port</code> arguments replace <code>,addr</code> and
+<code>,port</code>. The body argument is pasted into the let statement.</p>
 
 <p>We can call this macro similarly to above except that we no longer
 need to pass in a lambda.</p>
@@ -98,11 +98,24 @@ need to pass in a lambda.</p>
 =&gt; &quot;HTTP/1.1 302 Found&quot;
 </code></pre>
 
+<p>At read / compile time, the above macro call is expanded into the following.</p>
+
+<pre><code class="lisp">(let* ((socket (usocket:socket-connect &quot;www.google.com&quot; 80))
+        (stream (usocket:socket-stream socket))
+        (result (progn
+                  (format stream &quot;GET / HTTP/1.1~C~C~C~C&quot;
+                          #\Return #\Newline #\Return #\Newline)
+                  (force-output stream)
+                  (read-line stream)))))
+   (usocket:socket-close socket)
+   result)
+</code></pre>
+
 <p><code>with-open-socket</code> is effectively new syntax to the language that ends
 up just as clean as the Ruby block syntax.</p>
 
-<p>An interesting tidbit is that the lambda from <code>with-open-socket</code> was auto
-formatted by emacs as if it was a function parameter. The macro
-<code>with-open-socket</code> is formatted just like a <code>defun</code> or <code>defmacro</code> expression.</p>
+<p>An interesting tidbit is that emacs knows that the the macro <code>with-open-socket</code>
+has a <code>body</code> argument which means it&#39;s auto formatted with a two space indent
+rather than formatting the body like a normal function call argument.</p>
 
 </body>

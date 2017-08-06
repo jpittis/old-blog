@@ -74,8 +74,8 @@ block syntax to Lisp using a macro.
      result))
 ````
 
-At read / compile time, `addr` and `port` are replaced and the body of the
-macro is pasted into the let statement so that it binds to result.
+At read / compile time, `addr` and `port` arguments replace `,addr` and
+`,port`. The body argument is pasted into the let statement.
 
 We can call this macro similarly to above except that we no longer
 need to pass in a lambda.
@@ -90,9 +90,23 @@ need to pass in a lambda.
 => "HTTP/1.1 302 Found"
 ````
 
+At read / compile time, the above macro call is expanded into the following.
+
+````lisp
+(let* ((socket (usocket:socket-connect "www.google.com" 80))
+        (stream (usocket:socket-stream socket))
+        (result (progn
+                  (format stream "GET / HTTP/1.1~C~C~C~C"
+                          #\Return #\Newline #\Return #\Newline)
+                  (force-output stream)
+                  (read-line stream)))))
+   (usocket:socket-close socket)
+   result)
+````
+
 `with-open-socket` is effectively new syntax to the language that ends
 up just as clean as the Ruby block syntax.
 
-An interesting tidbit is that the lambda from `with-open-socket` was auto
-formatted by emacs as if it was a function parameter. The macro
-`with-open-socket` is formatted just like a `defun` or `defmacro` expression.
+An interesting tidbit is that emacs knows that the the macro `with-open-socket`
+has a `body` argument which means it's auto formatted with a two space indent
+rather than formatting the body like a normal function call argument.
