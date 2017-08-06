@@ -94,14 +94,14 @@ At read / compile time, the above macro call is expanded into the following.
 
 ````lisp
 (let* ((socket (usocket:socket-connect "www.google.com" 80))
-        (stream (usocket:socket-stream socket))
-        (result (progn
-                  (format stream "GET / HTTP/1.1~C~C~C~C"
-                          #\Return #\Newline #\Return #\Newline)
-                  (force-output stream)
-                  (read-line stream)))))
-   (usocket:socket-close socket)
-   result)
+       (stream (usocket:socket-stream socket))
+       (result (progn
+                 (format stream "GET / HTTP/1.1~C~C~C~C"
+                         #\Return #\Newline #\Return #\Newline)
+                 (force-output stream)
+                 (read-line stream))))
+  (usocket:socket-close socket)
+  result)
 ````
 
 `with-open-socket` is effectively new syntax to the language that ends
