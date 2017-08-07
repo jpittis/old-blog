@@ -17,15 +17,16 @@ def article_template(body, is_archive = false)
   </head>
 <body>
   #{body}
-  #{ is_archive ? nil : %{<p><a href="/archive.html"></a></p>"} }
+  #{ is_archive ? nil : %{<p><a href="/archive.html">Archive</a></p>} }
 </body>
 }
 end
 
 def archive_template(names)
-  names.map do |name|
-    %{<p><a href=/posts/#{name}.html>#{name}</a></p>}
+  links = names.map do |name|
+    %{<p><a href=/posts/#{name}.html>#{name.gsub('_', ' ')}</a></p>}
   end.join("\n  ")
+  "<h1>Archive</h1>\n#{links}"
 end
 
 def article_names
