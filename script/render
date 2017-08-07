@@ -2,7 +2,7 @@
 
 require 'redcarpet'
 
-def article_template(body)
+def article_template(body, is_archive = false)
 %{
 <!DOCTYPE html>
 <html>
@@ -16,12 +16,30 @@ def article_template(body)
     </style>
   </head>
 <body>
-#{body}
+  #{body}
+  #{ is_archive ? nil : %{<p><a href="/archive.html"></a></p>"} }
 </body>
 }
 end
 
-markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
-body = markdown.render(File.read(ARGV[0]))
-puts article_template(body)
+def archive_template(names)
+  names.map do |name|
+    %{<p><a href=/posts/#{name}.html>#{name}</a></p>}
+  end.join("\n  ")
+end
+
+def article_names
+  Dir["articles/*.md"].map do |file|
+    file[0..-4].gsub('articles/', '')
+  end
+end
+
+if ARGV[0] == 'article'
+  markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
+  body = markdown.render(File.read(ARGV[1]))
+  puts article_template(body)
+elsif ARGV[0] == 'archive'
+  body = archive_template(article_names)
+  puts article_template(body, true)
+end
 

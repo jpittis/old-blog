@@ -1,4 +1,6 @@
 #!/bin/bash
 
-./script/render articles/macro_expansion_with_slime.md > index.html
-./script/render articles/ruby_blocks_with_lisp_macros.md > ruby_blocks_with_lisp_macros.html
+./script/render article articles/macro_expansion_with_slime.md > index.html
+./script/render article articles/macro_expansion_with_slime.md > posts/macro_expansion_with_slime.html
+./script/render article articles/ruby_blocks_with_lisp_macros.md > posts/ruby_blocks_with_lisp_macros.html
+./script/render archive > archive.html

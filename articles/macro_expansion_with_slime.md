@@ -33,8 +33,8 @@ Oh my gosh that looks complicated!? I wonder what code it expands into when we
 call it.
 
 All I need to do is type `(read-int-from-bytes #(1) 0 1)` into my editor.
-Hitting `,sm` which calls the `macroexpand-1` function and sends the following
-into my right buffer.
+Hitting `,sm` calls `macroexpand-1` and sends the following code into my right
+buffer.
 
 ````Lisp
 (LET ((INT 0))
