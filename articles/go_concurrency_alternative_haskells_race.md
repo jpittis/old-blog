@@ -1,4 +1,4 @@
-## Go concurrency alternatives: Haskell's race!
+# Go concurrency alternatives: Haskell's race!
 #### Tuesday, January 16, 2018
 
 I'm tired of Go concurrency boilerplate and silly Ruby bugs that could be
