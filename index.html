@@ -18,7 +18,7 @@
 <p>I&#39;m tired of Go concurrency boilerplate and silly Ruby bugs that could be
 caught by a static type system. This recently brought me to Haskell. I came for
 the fp, and the implicit static type system. And now it looks like I also want
-to stay for the awesome conurrency.</p>
+to stay for the awesome concurrency.</p>
 
 <h2>Haskell&#39;s race function.</h2>
 
@@ -30,7 +30,7 @@ result of the operation that completes first.</p>
 <pre><code>race :: IO a -&gt; IO b -&gt; IO (Either a b)
 </code></pre>
 
-<p>You give it two &quot;things to do&quot; and it will run the concurrently. It will return
+<p>You give it two &quot;things to do&quot; and it will run them concurrently. It will return
 the result of whichever completes first, and cancel the other one.</p>
 
 <pre><code>ghci&gt; race ((threadDelay $ 1^6) &gt;&gt; return 1) (return 2)

@@ -4,7 +4,7 @@
 I'm tired of Go concurrency boilerplate and silly Ruby bugs that could be
 caught by a static type system. This recently brought me to Haskell. I came for
 the fp, and the implicit static type system. And now it looks like I also want
-to stay for the awesome conurrency.
+to stay for the awesome concurrency.
 
 ## Haskell's race function.
 
@@ -17,7 +17,7 @@ This is what Haskell's async package's `race` function accomplishes.
 race :: IO a -> IO b -> IO (Either a b)
 ```
 
-You give it two "things to do" and it will run the concurrently. It will return
+You give it two "things to do" and it will run them concurrently. It will return
 the result of whichever completes first, and cancel the other one.
 
 ```
