@@ -210,12 +210,12 @@ _, err := race(context.Background(), erroring, blocking) // err == "Boom!"
 Now that we've implemented `race` in Go, let's discuss the annoyance of
 learning it.
 
-1. `context` boilerplate at the call site.
+#### `context` boilerplate at the call site.
 
 Though I find that always passing around context values to be annoying, this is
 an effective way to encode a sort of cancelation tree into your program.
 
-2. Non blocking `ResultFunctions`.
+#### Non blocking `ResultFunctions`.
 
 This is a huge pain point. I need to design all the functions I want to run
 concurrently such that they respond to `cancel` and never block. This means
@@ -223,7 +223,7 @@ lots of `select` boilerplate. Because I'm writing the boilerplate by hand,
 there's always room for bugs. And I can't use other people's blocking code
 because it will leak Goroutines.
 
-3. Type `interface{}`.
+#### Type `interface{}`.
 
 The Go community is probably tired of hearing it, but fuck am I tired of not
 having generics.

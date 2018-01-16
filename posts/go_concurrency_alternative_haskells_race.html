@@ -209,16 +209,12 @@ cancel()
 <p>Now that we&#39;ve implemented <code>race</code> in Go, let&#39;s discuss the annoyance of
 learning it.</p>
 
-<ol>
-<li><code>context</code> boilerplate at the call site.</li>
-</ol>
+<h4><code>context</code> boilerplate at the call site.</h4>
 
 <p>Though I find that always passing around context values to be annoying, this is
 an effective way to encode a sort of cancelation tree into your program.</p>
 
-<ol>
-<li>Non blocking <code>ResultFunctions</code>.</li>
-</ol>
+<h4>Non blocking <code>ResultFunctions</code>.</h4>
 
 <p>This is a huge pain point. I need to design all the functions I want to run
 concurrently such that they respond to <code>cancel</code> and never block. This means
@@ -226,9 +222,7 @@ lots of <code>select</code> boilerplate. Because I&#39;m writing the boilerplate
 there&#39;s always room for bugs. And I can&#39;t use other people&#39;s blocking code
 because it will leak Goroutines.</p>
 
-<ol>
-<li>Type <code>interface{}</code>.</li>
-</ol>
+<h4>Type <code>interface{}</code>.</h4>
 
 <p>The Go community is probably tired of hearing it, but fuck am I tired of not
 having generics.</p>
