@@ -38,8 +38,8 @@ the result of whichever completes first, and cancel the other one.</p>
 </code></pre>
 
 <p>The first operation will pause for 1 second (1,000,000 micro seconds) and the
-second operation will print immediately. Because the <code>print &quot;Hello!&quot;</code> finishes
-before the <code>threadDelay</code>, the <code>print &quot;Never!&quot;</code> is canceled and never completes.</p>
+second operation will return immediately. Because the <code>return 2</code> finishes
+before the <code>threadDelay</code>, the <code>return 1</code> is canceled and never completes.</p>
 
 <p>(For those not familiar with the <code>$</code> operation, that&#39;s equivilant to using
 brackets like <code>(threadDelay (1^6))</code>. For those not familiar with the <code>&gt;&gt;</code>
@@ -206,8 +206,7 @@ cancel()
 
 <h3>The pain points.</h3>
 
-<p>Now that we&#39;ve implemented <code>race</code> in Go, let&#39;s discuss the annoyance of
-learning it.</p>
+<p>Now that we&#39;ve implemented <code>race</code> in Go, let&#39;s discuss it&#39;s issues.</p>
 
 <h4><code>context</code> boilerplate at the call site.</h4>
 

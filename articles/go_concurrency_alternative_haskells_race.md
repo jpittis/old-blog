@@ -26,8 +26,8 @@ ghci> race ((threadDelay $ 1^6) >> return 1) (return 2)
 ```
 
 The first operation will pause for 1 second (1,000,000 micro seconds) and the
-second operation will print immediately. Because the `print "Hello!"` finishes
-before the `threadDelay`, the `print "Never!"` is canceled and never completes.
+second operation will return immediately. Because the `return 2` finishes
+before the `threadDelay`, the `return 1` is canceled and never completes.
 
 (For those not familiar with the `$` operation, that's equivilant to using
 brackets like `(threadDelay (1^6))`. For those not familiar with the `>>`
@@ -207,8 +207,7 @@ _, err := race(context.Background(), erroring, blocking) // err == "Boom!"
 
 ### The pain points.
 
-Now that we've implemented `race` in Go, let's discuss the annoyance of
-learning it.
+Now that we've implemented `race` in Go, let's discuss it's issues.
 
 #### `context` boilerplate at the call site.
 
